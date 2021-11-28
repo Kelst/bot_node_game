@@ -22,7 +22,13 @@ const start=()=>{
     {
         command:"/game",
         description:"Start game"
-    }])
+    },
+    {
+        command:"/weather",
+        description:"get weather"
+    },
+
+])
     bot.on("message", async msg=>{
         const text=msg.text;
         const idChat=msg.chat.id;
@@ -34,6 +40,9 @@ const start=()=>{
         if(text==="/game"){
           return   startGame(idChat)
 
+        }
+        if(text==="/weather"){
+            return bot.sendMessage(idChat, '<b>TEST</b>', {parse_mode: 'HTML'});
         }
        return bot.sendMessage(idChat,"Я тебе не розумію")
         

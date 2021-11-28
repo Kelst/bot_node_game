@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start":"node index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.24.0",
     "node-telegram-bot-api": "^0.54.0",
     "nodemon": "^2.0.15"
   }
