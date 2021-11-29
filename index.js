@@ -2,7 +2,21 @@ const TelegramBot=require("node-telegram-bot-api");
 const token='2064289896:AAGLXOLULc434nBL_3ffw7o3gorGkKwewd8';
 const bot =new TelegramBot(token, {polling:true})
 const chat={}
+const weatherP={}
+
 const {gameOption,againOption}=require("./options.js")
+const {getWeather} = require('./weather');
+getWeather.then(weather =>{
+    weatherP.city=weather.data.location.city;
+    weatherP.region=weather.data.location.region;
+    weatherP.speed=weather.data.current_observation.wind.speed;
+    weatherP.visibility=weather.data.current_observation.atmosphere.visibility;
+    weatherP.sunrise=weather.data.current_observation.astronomy.sunrise;
+    weatherP.sunset=weather.data.current_observation.astronomy.sunset;
+    weatherP.condition=weather.data.current_observation.condition.text;
+    weatherP.temperature=weather.data.current_observation.condition.temperature;
+})
+
 async function  startGame(idChat){
     await bot.sendMessage(idChat,"Я загадав число від 0 до 10 ");
     const randomNumber=Math.floor(Math.random()*10);
@@ -42,9 +56,18 @@ const start=()=>{
 
         }
         if(text==="/weather"){
-            return bot.sendMessage(idChat, '<b>TEST</b>', {parse_mode: 'HTML'});
+            const result=`Місто : ${weatherP.city} \n
+            Регіон : ${weatherP.region} \n
+            Швидкість вітру : ${weatherP.speed} \n
+            схід сонця: ${weatherP.sunrise}  \n
+            захід сонця: ${weatherP.sunset} \n
+            погода :${weatherP.condition} \n
+            температура :${weatherP.temperature} \n
+            `
+           
+        return bot.sendMessage(idChat,result)
         }
-       return bot.sendMessage(idChat,"Я тебе не розумію")
+     
         
     })
     bot.on("callback_query", async msg=>{
