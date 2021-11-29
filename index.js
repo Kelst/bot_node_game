@@ -46,16 +46,16 @@ const start=()=>{
     bot.on("message", async msg=>{
         const text=msg.text;
         const idChat=msg.chat.id;
-        if(text==="/start")
+        if(text==="/start@kelst_seile_bot")
         return await  bot.sendSticker(idChat,"https://tlgrm.ru/_/stickers/c04/fe1/c04fe137-edbc-41e7-a199-b530c42bfe9e/5.webp")
         if(text==="/info"){
            return bot.sendMessage(idChat,`Привіт тебе звати ${msg.from.first_name} ${msg.from.last_name}`)
         }
-        if(text==="/game"){
+        if(text==="/game@kelst_seile_bot"){
           return   startGame(idChat)
 
         }
-        if(text==="/weather"){
+        if(text==="/weather@kelst_seile_bot"){
             const result=`Місто : ${weatherP.city} \n
             Регіон : ${weatherP.region} \n
             Швидкість вітру : ${weatherP.speed} \n
@@ -75,7 +75,7 @@ const start=()=>{
         const data=msg.data;
         const idChat=msg.message.chat.id;
     
-        if(data=="/again"){  return startGame(idChat)}
+        if(data=="/again@kelst_seile_bot"){  return startGame(idChat)}
         if(data==chat[idChat]){
             return bot.sendMessage(idChat,"Ура ти вгадав число!!!!"+data,againOption);
         }else
